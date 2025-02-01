@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 @Slf4j
 @Controller
 @RequestMapping("/users")
@@ -56,7 +57,7 @@ public class UserController {
         model.addAttribute("user", user);
         return "users/edit";
     }
-    @PostMapping("/{id}/edit")
+    @PutMapping("/{id}/edit")
     public String updateUser(@PathVariable("id") long id, @Valid @ModelAttribute("user") User updatedUser, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             log.info("Ошибка при обновлении пользователя с id = {}: {}", id, updatedUser);
@@ -67,7 +68,7 @@ public class UserController {
         log.info("Юзер с id = {} обновлен", id);
         return "redirect:/users";
     }
-    @PostMapping("/{id}/delete")
+    @DeleteMapping("/{id}/delete")
     public String deleteUser(@PathVariable("id") long id) {
         userService.delete(id);
         log.info("пользователь с id = {} удален", id);

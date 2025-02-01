@@ -26,6 +26,7 @@
         <td>
             <a th:href="@{/users/{id}/edit(id=${user.id})}">Edit</a>
             <form th:action="@{/users/{id}/delete(id=${user.id})}" method="post" style="display:inline;">
+                <input type="hidden" name="_method" value="DELETE">
                 <button type="submit">Delete</button>
             </form>
         </td>
